@@ -2,22 +2,28 @@
   "name": "gatinos_web",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "stop": "killall node"
+    "stop": "killall node",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "axios": "^1.9.0",
+    "dotenv": "^16.5.0",
     "express": "^4.21.2",
-    "express-handlebars": "^8.0.1"
+    "express-handlebars": "^8.0.1",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "jest": "^29.7.0",
+    "nodemon": "^3.1.10",
     "supertest": "^7.1.0"
   }
 }

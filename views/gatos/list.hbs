@@ -1,0 +1,27 @@
+{{!-- extiende tu layout principal --}}
+{{#extend "layouts/main"}}
+
+  {{#content "body"}}
+    <h1>{{title}}</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Nombre</th><th>Edad</th>
+          <th>Peso (kg)</th><th>Salud</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each gatos}}
+          <tr>
+            <td>{{id}}</td>
+            <td>{{nombre}}</td>
+            <td>{{edad}}</td>
+            <td>{{peso}}</td>
+            <td>{{estadoSalud}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{/content}}
+
+{{/extend}}

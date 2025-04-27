@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "nombre": "Michi",
+      "edad": 3,
+      "peso": 4.2,
+      "fechaUltimoChequeo": "2025-04-01",
+      "fechaBorrado": null
+    },
+    {
+      "id": 2,
+      "nombre": "Luna",
+      "edad": 7,
+      "peso": 3.8,
+      "fechaUltimoChequeo": "2025-03-20",
+      "fechaBorrado": null
+    },
+    {
+      "id": 3,
+      "nombre": "Nube",
+      "edad": 5,
+      "peso": 5.1,
+      "fechaUltimoChequeo": "2025-02-15",
+      "fechaBorrado": "2025-04-10"
+    }
+  ]
+  
