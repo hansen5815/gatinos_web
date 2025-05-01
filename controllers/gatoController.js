@@ -28,7 +28,14 @@ async function crearGato(req, res, next) {
     await crearNuevoGato({
       nombre: datos.nombre,
       edad: Number(datos.edad),
-      peso: Number(datos.peso)
+      peso: Number(datos.peso),
+      vacunado: datos.vacunado === 'on' || datos.vacunado === true,
+      cer: datos.cer === 'on' || datos.cer === true,
+      enfermedades: Array.isArray(datos.enfermedades)
+        ? datos.enfermedades
+        : datos.enfermedades
+        ? [datos.enfermedades]
+        : []
     });
     res.redirect('/gatos');
   } catch (err) {
@@ -67,7 +74,14 @@ async function actualizarGato(req, res, next) {
       id,
       nombre: datos.nombre,
       edad: Number(datos.edad),
-      peso: Number(datos.peso)
+      peso: Number(datos.peso),
+      vacunado: datos.vacunado === 'on' || datos.vacunado === true,
+      cer: datos.cer === 'on' || datos.cer === true,
+      enfermedades: Array.isArray(datos.enfermedades)
+        ? datos.enfermedades
+        : datos.enfermedades
+        ? [datos.enfermedades]
+        : []
     });
     res.redirect('/gatos');
   } catch (err) {

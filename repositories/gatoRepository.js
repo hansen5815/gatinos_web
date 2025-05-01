@@ -26,9 +26,17 @@ function getGatoById(id) {
 // Crea un nuevo gato
 function createGato(gato) {
   const gatos = readData();
-  // Generar ID único simple
-  const nuevoId = Date.now();
+
+  // Calcula el siguiente ID correlativo
+  const maxId = gatos.reduce((max, g) => {
+    // Asegúrate de comparar numéricamente
+    const idNum = Number(g.id);
+    return !isNaN(idNum) && idNum > max ? idNum : max;
+  }, 0);
+
+  const nuevoId = maxId + 1;
   const nuevo = { id: nuevoId, ...gato, fechaBorrado: null };
+
   gatos.push(nuevo);
   writeData(gatos);
   return nuevo;
