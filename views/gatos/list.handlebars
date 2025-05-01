@@ -1,7 +1,26 @@
 <h1>{{title}}</h1>
-
-<ul>
-  {{#each gatos}}
-    <li>{{nombre}} - {{estadoSalud}}</li>
-  {{/each}}
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th><th>Nombre</th><th>Edad</th><th>Peso</th><th>Salud</th><th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each gatos}}
+    <tr>
+      <td>{{id}}</td>
+      <td>{{nombre}}</td>
+      <td>{{edad}}</td>
+      <td>{{peso}}</td>
+      <td>{{estadoSalud}}</td>
+      <td>
+        <a href="/gatos/{{id}}">Ver</a> |
+        <a href="/gatos/{{id}}/edit">Editar</a> |
+        <form action="/gatos/{{id}}?_method=DELETE" method="POST" style="display:inline">
+          <button onclick="return confirm('Eliminar?')">Eliminar</button>
+        </form>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

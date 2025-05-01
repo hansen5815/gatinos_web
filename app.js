@@ -2,24 +2,20 @@
 require('dotenv').config();
 
 // Importar dependencias
-const express = require('express');
-const { engine } = require('express-handlebars');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const path = require('path');
+const express        = require('express');
+const { engine }     = require('express-handlebars');
+const helmet         = require('helmet');
+const morgan         = require('morgan');
+const path           = require('path');
+const methodOverride = require('method-override');
 
 // Crear app de Express
 const app = express();
 
 // Routers
-const indexRouter = require('./routes/indexRouter');
-console.log('DEBUG indexRouter:', indexRouter);
-
+const indexRouter    = require('./routes/indexRouter');
 const coloniasRouter = require('./routes/coloniasRouter');
-console.log('DEBUG coloniasRouter:', coloniasRouter);
-
-const gatosRouter = require('./routes/gatosRouter');
-console.log('DEBUG gatosRouter:', gatosRouter);
+const gatosRouter    = require('./routes/gatosRouter');
 
 // Configuración de puerto
 const PORT = process.env.PORT || 3000;
@@ -32,13 +28,22 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// **Registrar method-override** para admitir PUT/DELETE desde formularios
+app.use(methodOverride('_method'));
+
 // Servir archivos estáticos desde la carpeta "public"
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Configuración de Handlebars como motor de plantillas
-app.engine('handlebars', engine());
+app.engine('handlebars', engine({
+  extname:     '.handlebars',    // extensión
+  defaultLayout: 'main',         // vista layouts/main.handlebars
+  layoutsDir:    path.join(__dirname, 'views', 'layouts'), // carpeta de layouts
+  partialsDir:   path.join(__dirname, 'views', 'partials'), // carpeta de partials
+}));
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
+
 
 // Montar los routers
 app.use('/', indexRouter);
@@ -46,11 +51,11 @@ app.use('/colonias', coloniasRouter);
 app.use('/gatos', gatosRouter);
 
 // Middleware para manejar rutas no encontradas (404)
-app.use((req, res, next) => {
+app.use((req, res) => {
   res.status(404).render('404', { url: req.originalUrl });
 });
 
-// Middleware para manejar errores generales
+// Middleware para manejar errores generales (500)
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).render('error', { error: err });

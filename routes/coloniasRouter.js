@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// Ejemplo: ruta de colonias
+// Listado de colonias (temporal)
 router.get('/', (req, res) => {
   res.send('Listado de colonias');
 });
