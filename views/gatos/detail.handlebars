@@ -1,10 +1,58 @@
-  <h1>{{title}}</h1>
-  <ul>
-    <li><strong>ID:</strong> {{gato.id}}</li>
-    <li><strong>Nombre:</strong> {{gato.nombre}}</li>
-    <li><strong>Edad:</strong> {{gato.edad}}</li>
-    <li><strong>Peso:</strong> {{gato.peso}}</li>
-    <li><strong>Estado Salud:</strong> {{gato.estadoSalud}}</li>
-  </ul>
-  <a href="/gatos/{{gato.id}}/edit">Editar</a> |
-  <a href="/gatos">Volver al listado</a>
+<div class="container mt-5">
+  <h1 class="mb-4">{{title}}</h1>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">{{gato.nombre}} <small class="text-muted">#{{gato.id}}</small></h5>
+      <p class="card-text mb-1"><strong>Edad:</strong> {{gato.edad}} años</p>
+      <p class="card-text mb-1"><strong>Peso:</strong> {{gato.peso}} kg</p>
+      <p class="card-text mb-1">
+        <strong>Estado de Salud:</strong>
+        {{#if (eq gato.estadoSalud "GRAVE")}}
+          <span class="badge bg-danger">GRAVE</span>
+        {{else if (eq gato.estadoSalud "REGULAR")}}
+          <span class="badge bg-warning text-dark">REGULAR</span>
+        {{else}}
+          <span class="badge bg-success">SANO</span>
+        {{/if}}
+      </p>
+      <p class="card-text mb-1">
+        <strong>Vacunado:</strong>
+        {{#if gato.vacunado}}
+          <i class="bi bi-check-circle-fill text-success"></i>
+        {{else}}
+          <i class="bi bi-x-circle-fill text-danger"></i>
+        {{/if}}
+      </p>
+      <p class="card-text mb-1">
+        <strong>Esterilizado (CER):</strong>
+        {{#if gato.cer}}
+          <i class="bi bi-check-circle-fill text-success"></i>
+        {{else}}
+          <i class="bi bi-x-circle-fill text-danger"></i>
+        {{/if}}
+      </p>
+      <p class="card-text">
+        <strong>Enfermedades:</strong>
+        {{#if gato.enfermedades.length}}
+          <ul class="mb-0">
+            {{#each gato.enfermedades}}
+              <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        {{else}}
+          <span class="text-muted">Ninguna</span>
+        {{/if}}
+      </p>
+    </div>
+    <div class="card-footer">
+      <a href="/gatos/{{gato.id}}/edit" class="btn btn-warning">Editar</a>
+      <form action="/gatos/{{gato.id}}?_method=DELETE" method="POST" class="d-inline">
+        <button class="btn btn-danger" onclick="return confirm('¿Eliminar este gato?')">
+          Eliminar
+        </button>
+      </form>
+      <a href="/gatos" class="btn btn-secondary ms-2">Volver al listado</a>
+    </div>
+  </div>
+</div>

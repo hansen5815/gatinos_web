@@ -4,11 +4,11 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "stop": "killall node",
-    "dev": "nodemon app.js"
-  },
+        "test": "jest --coverage --verbose",
+        "start": "node app.js",
+        "stop": "killall node",
+        "dev": "nodemon app.js"
+      },    
   "keywords": [],
   "author": "",
   "license": "ISC",

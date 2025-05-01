@@ -1,16 +1,37 @@
-  <h1>{{title}}</h1>
+<div class="container mt-5">
+  <h1 class="mb-4">{{title}}</h1>
   <form action="/gatos" method="POST">
-    <div>
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" name="nombre" required>
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" id="nombre" name="nombre" class="form-control" required>
     </div>
-    <div>
-      <label for="edad">Edad:</label>
-      <input type="number" id="edad" name="edad" step="1" required>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label for="edad" class="form-label">Edad (años)</label>
+        <input type="number" id="edad" name="edad" class="form-control" min="0" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="peso" class="form-label">Peso (kg)</label>
+        <input type="number" id="peso" name="peso" class="form-control" step="0.1" min="0" required>
+      </div>
     </div>
-    <div>
-      <label for="peso">Peso (kg):</label>
-      <input type="number" id="peso" name="peso" step="0.1" required>
+
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="vacunado" name="vacunado">
+      <label class="form-check-label" for="vacunado">Vacunado</label>
     </div>
-    <button type="submit">Crear Gato</button>
+    <div class="form-check mb-3">
+      <input class="form-check-input" type="checkbox" id="cer" name="cer">
+      <label class="form-check-label" for="cer">Esterilizado (CER)</label>
+    </div>
+
+    <div class="mb-3">
+      <label for="enfermedades" class="form-label">Enfermedades (sep. por comas)</label>
+      <input type="text" id="enfermedades" name="enfermedades" class="form-control" placeholder="ej. rabia, gripe felina">
+    </div>
+
+    <button type="submit" class="btn btn-success">Crear Gato</button>
+    <a href="/gatos" class="btn btn-secondary ms-2">Cancelar</a>
   </form>
+</div>

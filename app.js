@@ -36,14 +36,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Configuración de Handlebars como motor de plantillas
 app.engine('handlebars', engine({
-  extname:     '.handlebars',    // extensión
-  defaultLayout: 'main',         // vista layouts/main.handlebars
-  layoutsDir:    path.join(__dirname, 'views', 'layouts'), // carpeta de layouts
-  partialsDir:   path.join(__dirname, 'views', 'partials'), // carpeta de partials
+  extname:      '.handlebars',
+  defaultLayout:'main',
+  layoutsDir:   path.join(__dirname, 'views', 'layouts'),
+  partialsDir:  path.join(__dirname, 'views', 'partials'),  // opcional
+  helpers: {
+    // helper eq para comparar dos valores
+    eq: (a, b) => a === b
+  }
 }));
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
-
 
 // Montar los routers
 app.use('/', indexRouter);

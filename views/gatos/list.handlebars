@@ -1,26 +1,49 @@
-<h1>{{title}}</h1>
-<table>
-  <thead>
-    <tr>
-      <th>ID</th><th>Nombre</th><th>Edad</th><th>Peso</th><th>Salud</th><th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each gatos}}
-    <tr>
-      <td>{{id}}</td>
-      <td>{{nombre}}</td>
-      <td>{{edad}}</td>
-      <td>{{peso}}</td>
-      <td>{{estadoSalud}}</td>
-      <td>
-        <a href="/gatos/{{id}}">Ver</a> |
-        <a href="/gatos/{{id}}/edit">Editar</a> |
-        <form action="/gatos/{{id}}?_method=DELETE" method="POST" style="display:inline">
-          <button onclick="return confirm('Eliminar?')">Eliminar</button>
-        </form>
-      </td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
+<div class="container mt-4">
+  <h1 class="mb-4">{{title}}</h1>
+
+  <a href="/gatos/new" class="btn btn-primary mb-3">Nuevo Gato</a>
+
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th><th>Nombre</th><th>Edad</th><th>Peso</th>
+        <th>Salud</th><th>Esterilizado</th><th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each gatos}}
+      <tr>
+        <td>{{id}}</td>
+        <td>{{nombre}}</td>
+        <td>{{edad}}</td>
+        <td>{{peso}}</td>
+        <td>
+          {{#if (eq estadoSalud "GRAVE")}}
+            <span class="badge bg-danger">GRAVE</span>
+          {{else if (eq estadoSalud "REGULAR")}}
+            <span class="badge bg-warning text-dark">REGULAR</span>
+          {{else}}
+            <span class="badge bg-success">SANO</span>
+          {{/if}}
+        </td>
+        <td>
+          {{#if cer}}
+            <i class="bi bi-check-circle-fill text-success"></i>
+          {{else}}
+            <i class="bi bi-x-circle-fill text-danger"></i>
+          {{/if}}
+        </td>
+        <td>
+          <a href="/gatos/{{id}}" class="btn btn-sm btn-info">Ver</a>
+          <a href="/gatos/{{id}}/edit" class="btn btn-sm btn-warning">Editar</a>
+          <form action="/gatos/{{id}}?_method=DELETE" method="POST" class="d-inline">
+            <button class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar este gato?')">
+              Eliminar
+            </button>
+          </form>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

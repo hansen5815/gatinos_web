@@ -4,23 +4,44 @@
     "nombre": "Michi",
     "edad": 3,
     "peso": 4.2,
-    "fechaUltimoChequeo": "2025-04-01",
+    "vacunado": true,
+    "cer": true,
+    "enfermedades": [],
     "fechaBorrado": null
   },
   {
     "id": 2,
     "nombre": "Luna",
-    "edad": 7,
-    "peso": 3.8,
-    "fechaUltimoChequeo": "2025-03-20",
+    "edad": 5,
+    "peso": 3.5,
+    "vacunado": false,
+    "cer": true,
+    "enfermedades": [
+      "rabia"
+    ],
     "fechaBorrado": null
   },
   {
     "id": 3,
     "nombre": "Nube",
-    "edad": 5,
+    "edad": 7,
     "peso": 5.1,
-    "fechaUltimoChequeo": "2025-02-15",
+    "vacunado": true,
+    "cer": false,
+    "enfermedades": [
+      "gripe felina",
+      "virus sincitial"
+    ],
     "fechaBorrado": null
   },
+  {
+    "id": 4,
+    "nombre": "leon",
+    "edad": 5,
+    "peso": 4,
+    "vacunado": false,
+    "cer": true,
+    "enfermedades": [],
+    "fechaBorrado": null
+  }
 ]
