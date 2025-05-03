@@ -64,7 +64,12 @@ app.use((err, req, res, next) => {
   res.status(500).render('error', { error: err });
 });
 
-// Iniciar servidor
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
-});
+// module.exports para que supertest pueda importarla sin arrancar
+module.exports = app;
+
+// Arranque condicional si ejecutas `node app.js` (no al hacer require)
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Servidor escuchando en http://localhost:${PORT}`);
+  });
+}

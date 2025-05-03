@@ -1,4 +1,3 @@
-// repositories/gatoRepository.js
 const fs   = require('fs');
 const path = require('path');
 const file = path.join(__dirname, '..', 'data', 'gatos.json');
@@ -9,54 +8,79 @@ function readData() {
 }
 
 function writeData(data) {
-  fs.writeFileSync(file, JSON.stringify(data, null, 2), 'utf8');
+  fs.writeFileSync(file, JSON.stringify(data, null, 2));
 }
 
-// Devuelve todos los gatos (incluidos los de baja)
+// Devuelve todos los gatos
 function getAllGatos() {
   return readData();
 }
 
-// Busca un gato por ID
+// Devuelve un gato por ID
 function getGatoById(id) {
+  if (id === undefined || id === null) {
+    throw new Error('ID no proporcionado');
+  }
   const gatos = readData();
   return gatos.find(g => String(g.id) === String(id));
 }
 
-// Crea un nuevo gato
+// Crea un nuevo gato con ID correlativo
 function createGato(gato) {
-  const gatos = readData();
+  if (
+    !gato ||
+    typeof gato.nombre !== 'string' ||
+    typeof gato.edad   !== 'number' ||
+    typeof gato.peso   !== 'number'
+  ) {
+    throw new Error('Datos del gato incompletos');
+  }
 
-  // Calcula el siguiente ID correlativo
+  const gatos = readData();
+  // calcular siguiente ID
   const maxId = gatos.reduce((max, g) => {
-    // Asegúrate de comparar numéricamente
     const idNum = Number(g.id);
     return !isNaN(idNum) && idNum > max ? idNum : max;
   }, 0);
 
-  const nuevoId = maxId + 1;
-  const nuevo = { id: nuevoId, ...gato, fechaBorrado: null };
+  const nuevo = {
+    id: maxId + 1,
+    ...gato,
+    fechaBorrado: null
+  };
 
   gatos.push(nuevo);
   writeData(gatos);
   return nuevo;
 }
 
-// Actualiza datos de un gato existente
+// Actualiza un gato existente o lanza "Gato no encontrado"
 function updateGato(gatoActualizado) {
   const gatos = readData();
-  const idx = gatos.findIndex(g => String(g.id) === String(gatoActualizado.id));
-  if (idx < 0) throw new Error('Gato no encontrado');
+  // Buscamos índice con safe-access al id
+  const idx = gatos.findIndex(g => 
+    String(g.id) === String(gatoActualizado?.id)
+  );
+
+  if (idx < 0) {
+    throw new Error('Gato no encontrado');
+  }
+
   gatos[idx] = { ...gatos[idx], ...gatoActualizado };
   writeData(gatos);
   return gatos[idx];
 }
 
-// Marca un gato como dado de baja
+// Marca un gato como borrado
 function deleteGato(id) {
+  if (id === undefined || id === null) {
+    throw new Error('ID no proporcionado');
+  }
   const gatos = readData();
-  const idx = gatos.findIndex(g => String(g.id) === String(id));
-  if (idx < 0) throw new Error('Gato no encontrado');
+  const idx   = gatos.findIndex(g => String(g.id) === String(id));
+  if (idx < 0) {
+    throw new Error('Gato no encontrado');
+  }
   gatos[idx].fechaBorrado = new Date().toISOString();
   writeData(gatos);
   return gatos[idx];
@@ -69,69 +93,3 @@ module.exports = {
   updateGato,
   deleteGato
 };
-
-
-
-/* Este bloque de código contiene las funciones para interactuar con la API de gatos.
-   Se utiliza Axios para realizar las peticiones HTTP a la API. */
-
-/* const axios = require('axios');
-
-const instance = axios.create({
-  baseURL: 'https://localhost:8080',
-  timeout: 1000,
-  headers: { 'X-Custom-Header': 'foobar' }
-});
-
-exports.getAllGatos = async () => {
-  return await instance.get('/gatos')
-    .then(res => res.data)
-    .catch(err => {
-      console.error('Error al obtener gatos:', err.message);
-      throw err;
-    });
-};
-
-exports.getGatoPorId = async (id) => {
-  if (!id) throw new Error('ID no proporcionado');
-
-  return await instance.get(`/gatos/${id}`)
-    .then(res => res.data)
-    .catch(err => {
-      console.error(`Error al obtener gato con ID ${id}:`, err.message);
-      throw err;
-    });
-};
-
-exports.crearGato = async (gato) => {
-  if (!gato) throw new Error('Datos del gato no proporcionados');
-
-  return await instance.post('/gatos', gato)
-    .then(res => res.data)
-    .catch(err => {
-      console.error('Error al crear gato:', err.message);
-      throw err;
-    });
-};
-
-exports.actualizarGato = async (gato) => {
-  if (!gato || !gato.id) throw new Error('ID o datos de gato no proporcionados');
-
-  return await instance.put(`/gatos/${gato.id}`, gato)
-    .then(res => res.data)
-    .catch(err => {
-      console.error(`Error al actualizar gato con ID ${gato.id}:`, err.message);
-      throw err;
-    });
-};
-
-exports.eliminarGato = async (id) => {
-  if (!id) throw new Error('ID no proporcionado');
-
-  return await instance.delete(`/gatos/${id}`)
-    .then(res => res.data)
-    .catch(err => {
-      console.error(`Error al eliminar gato con ID ${id}:`, err.message);
-      throw err;
-    });
-}; */

@@ -23,23 +23,22 @@
   },
   {
     "id": 3,
-    "nombre": "Nube",
-    "edad": 7,
-    "peso": 5.1,
-    "vacunado": true,
+    "nombre": "Iván",
+    "edad": 5,
+    "peso": 7,
+    "vacunado": false,
     "cer": false,
     "enfermedades": [
-      "gripe felina",
-      "virus sincitial"
+      "Gripe felina"
     ],
     "fechaBorrado": null
   },
   {
     "id": 4,
-    "nombre": "leon",
-    "edad": 5,
-    "peso": 4,
-    "vacunado": false,
+    "nombre": "Kai",
+    "edad": 6,
+    "peso": 5,
+    "vacunado": true,
     "cer": true,
     "enfermedades": [],
     "fechaBorrado": null
