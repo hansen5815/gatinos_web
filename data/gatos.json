@@ -20,5 +20,57 @@
       "rabia"
     ],
     "fechaBorrado": null
+  },
+  {
+    "id": 3,
+    "nombre": "Ivanin",
+    "edad": 7,
+    "peso": 7,
+    "vacunado": true,
+    "cer": false,
+    "enfermedades": [
+      "Gripe felina"
+    ],
+    "fechaBorrado": null
+  },
+  {
+    "id": 4,
+    "nombre": "Michina",
+    "edad": 3,
+    "peso": 3,
+    "vacunado": true,
+    "cer": true,
+    "enfermedades": [],
+    "fechaBorrado": null
+  },
+  {
+    "id": 5,
+    "nombre": "Kai",
+    "edad": 5,
+    "peso": 5,
+    "vacunado": false,
+    "cer": true,
+    "enfermedades": [],
+    "fechaBorrado": null
+  },
+  {
+    "id": 6,
+    "nombre": "Dongato",
+    "edad": 3,
+    "peso": 3,
+    "vacunado": true,
+    "cer": false,
+    "enfermedades": [],
+    "fechaBorrado": null
+  },
+  {
+    "id": 7,
+    "nombre": "Demonio",
+    "edad": 6,
+    "peso": 6,
+    "vacunado": false,
+    "cer": false,
+    "enfermedades": [],
+    "fechaBorrado": "2025-05-05T17:03:44.480Z"
   }
 ]
