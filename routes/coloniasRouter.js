@@ -1,26 +1,18 @@
-const express = require('express');
-const router  = express.Router();
-const controller = require('../controllers/coloniaController');
+/**
+ * Router de colonias.
+ * @module routes/coloniasRouter
+ */
 
-// Listado
-router.get('/', controller.listarTodasColonias);
+const express = require("express");
+const router = express.Router();
+const ctrl = require("../controllers/coloniaController");
 
-// Formulario crear
-router.get('/new', controller.mostrarFormularioCrear);
-
-// Crear
-router.post('/', controller.crearNuevaColonia);
-
-// Detalle
-router.get('/:id', controller.mostrarDetalleColonia);
-
-// Formulario editar
-router.get('/:id/edit', controller.mostrarFormularioEditar);
-
-// Actualizar (PUT)
-router.put('/:id', controller.actualizarColonia);
-
-// Eliminar (DELETE)
-router.delete('/:id', controller.eliminarColonia);
+router.get("/", ctrl.listarTodasColonias);
+router.get("/new", ctrl.mostrarFormularioCrear);
+router.post("/", ctrl.crearNuevaColonia);
+router.get("/:id", ctrl.mostrarDetalleColonia);
+router.get("/:id/edit", ctrl.mostrarFormularioEditar);
+router.put("/:id", ctrl.actualizarColonia);
+router.delete("/:id", ctrl.eliminarColonia);
 
 module.exports = router;

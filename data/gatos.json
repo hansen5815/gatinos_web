@@ -20,27 +20,5 @@
       "rabia"
     ],
     "fechaBorrado": null
-  },
-  {
-    "id": 3,
-    "nombre": "Iván",
-    "edad": 5,
-    "peso": 7,
-    "vacunado": false,
-    "cer": false,
-    "enfermedades": [
-      "Gripe felina"
-    ],
-    "fechaBorrado": null
-  },
-  {
-    "id": 4,
-    "nombre": "Kai",
-    "edad": 6,
-    "peso": 5,
-    "vacunado": true,
-    "cer": true,
-    "enfermedades": [],
-    "fechaBorrado": null
   }
 ]

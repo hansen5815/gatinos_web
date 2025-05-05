@@ -1,3 +1,8 @@
+/**
+ * Controlador de gatos.
+ * @module controllers/gatoController
+ */
+
 const {
   listarGatosActivos,
   recuperarPorId,
@@ -6,7 +11,15 @@ const {
   eliminarRegistroGato
 } = require('../services/gatoService');
 
-// Listar todos los gatos
+/**
+ * GET /gatos
+ * Lista todos los gatos activos.
+ *
+ * @param {Object} req   - Objeto de petición.
+ * @param {Object} res   - Renderiza 'gatos/list'.
+ * @param {Function} next - En caso de error.
+ * @returns {Promise<void>}
+ */
 async function listarGatos(req, res, next) {
   try {
     const gatos = await listarGatosActivos();
@@ -16,25 +29,40 @@ async function listarGatos(req, res, next) {
   }
 }
 
-// Mostrar formulario para crear nuevo gato
+/**
+ * GET /gatos/new
+ * Muestra el formulario de creación.
+ *
+ * @param {Object} req - Petición.
+ * @param {Object} res - Renderiza 'gatos/new'.
+ * @returns {void}
+ */
 function mostrarFormularioCrear(req, res) {
   res.render('gatos/new', { title: 'Crear Gato' });
 }
 
-// Crear un nuevo gato
+/**
+ * POST /gatos
+ * Crea un gato y redirige a /gatos.
+ *
+ * @param {Object} req   - req.body con los datos.
+ * @param {Object} res   - Redirige a listado.
+ * @param {Function} next - En caso de error.
+ * @returns {Promise<void>}
+ */
 async function crearGato(req, res, next) {
   try {
-    const datos = req.body;
+    const d = req.body;
     await crearNuevoGato({
-      nombre: datos.nombre,
-      edad: Number(datos.edad),
-      peso: Number(datos.peso),
-      vacunado: datos.vacunado === 'on' || datos.vacunado === true,
-      cer: datos.cer === 'on' || datos.cer === true,
-      enfermedades: Array.isArray(datos.enfermedades)
-        ? datos.enfermedades
-        : datos.enfermedades
-        ? [datos.enfermedades]
+      nombre: d.nombre,
+      edad:   Number(d.edad),
+      peso:   Number(d.peso),
+      vacunado: d.vacunado === 'on' || d.vacunado === true,
+      cer:       d.cer === 'on'      || d.cer === true,
+      enfermedades: Array.isArray(d.enfermedades)
+        ? d.enfermedades
+        : d.enfermedades
+        ? [d.enfermedades]
         : []
     });
     res.redirect('/gatos');
@@ -43,7 +71,15 @@ async function crearGato(req, res, next) {
   }
 }
 
-// Mostrar detalle de un gato
+/**
+ * GET /gatos/:id
+ * Muestra detalle de un gato.
+ *
+ * @param {Object} req   - req.params.id es el ID.
+ * @param {Object} res   - Renderiza 'gatos/detail'.
+ * @param {Function} next - En caso de error.
+ * @returns {Promise<void>}
+ */
 async function mostrarDetalleGato(req, res, next) {
   try {
     const { id } = req.params;
@@ -54,7 +90,15 @@ async function mostrarDetalleGato(req, res, next) {
   }
 }
 
-// Mostrar formulario para editar un gato
+/**
+ * GET /gatos/:id/edit
+ * Muestra el formulario de edición.
+ *
+ * @param {Object} req   - req.params.id.
+ * @param {Object} res   - Renderiza 'gatos/edit'.
+ * @param {Function} next - En caso de error.
+ * @returns {Promise<void>}
+ */
 async function mostrarFormularioEditar(req, res, next) {
   try {
     const { id } = req.params;
@@ -65,22 +109,30 @@ async function mostrarFormularioEditar(req, res, next) {
   }
 }
 
-// Actualizar un gato existente
+/**
+ * PUT /gatos/:id
+ * Actualiza un gato y redirige.
+ *
+ * @param {Object} req   - req.params.id y req.body.
+ * @param {Object} res   - Redirige a /gatos.
+ * @param {Function} next - En caso de error.
+ * @returns {Promise<void>}
+ */
 async function actualizarGato(req, res, next) {
   try {
     const { id } = req.params;
-    const datos = req.body;
+    const d = req.body;
     await actualizarDatosGato({
       id,
-      nombre: datos.nombre,
-      edad: Number(datos.edad),
-      peso: Number(datos.peso),
-      vacunado: datos.vacunado === 'on' || datos.vacunado === true,
-      cer: datos.cer === 'on' || datos.cer === true,
-      enfermedades: Array.isArray(datos.enfermedades)
-        ? datos.enfermedades
-        : datos.enfermedades
-        ? [datos.enfermedades]
+      nombre: d.nombre,
+      edad:   Number(d.edad),
+      peso:   Number(d.peso),
+      vacunado: d.vacunado === 'on' || d.vacunado === true,
+      cer:       d.cer === 'on'      || d.cer === true,
+      enfermedades: Array.isArray(d.enfermedades)
+        ? d.enfermedades
+        : d.enfermedades
+        ? [d.enfermedades]
         : []
     });
     res.redirect('/gatos');
@@ -89,7 +141,15 @@ async function actualizarGato(req, res, next) {
   }
 }
 
-// Eliminar (marcar) un gato
+/**
+ * DELETE /gatos/:id
+ * Marca como borrado y redirige.
+ *
+ * @param {Object} req   - req.params.id.
+ * @param {Object} res   - Redirige a /gatos.
+ * @param {Function} next - En caso de error.
+ * @returns {Promise<void>}
+ */
 async function eliminarGato(req, res, next) {
   try {
     const { id } = req.params;

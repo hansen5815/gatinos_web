@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controllers/coloniaController.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controllers/coloniaController.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Controlador de colonias.
+ * @module controllers/coloniaController
+ */
+
+const {
+  listarColonias,
+  recuperarPorId,
+  crearColonia: svcCrearColonia,
+  actualizarColonia: svcActualizarColonia,
+  eliminarColonia: svcEliminarColonia
+} = require('../services/coloniaService');
+
+/**
+ * GET /colonias
+ * Lista todas las colonias.
+ *
+ * @param {Object} req   - Objeto de petición de Express.
+ * @param {Object} res   - Objeto de respuesta de Express.
+ * @param {Function} next - Middleware next en caso de error.
+ * @returns {Promise&lt;void>}
+ */
+async function listarTodasColonias(req, res, next) {
+  try {
+    const colonias = await listarColonias();
+    res.render('colonias/list', {
+      title: 'Listado de Colonias',
+      colonias
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+/**
+ * GET /colonias/new
+ * Muestra el formulario para crear una nueva colonia.
+ *
+ * @param {Object} req - Objeto de petición.
+ * @param {Object} res - Objeto de respuesta.
+ * @returns {void}
+ */
+function mostrarFormularioCrear(req, res) {
+  res.render('colonias/new', {
+    title: 'Crear Colonia'
+  });
+}
+
+/**
+ * POST /colonias
+ * Crea una nueva colonia y redirige al listado.
+ *
+ * @param {Object} req   - req.body contiene { nombre }.
+ * @param {Object} res   - Se redirige a /colonias.
+ * @param {Function} next - En caso de error.
+ * @returns {Promise&lt;void>}
+ */
+async function crearNuevaColonia(req, res, next) {
+  try {
+    const datos = req.body;
+    await svcCrearColonia({ nombre: datos.nombre });
+    res.redirect('/colonias');
+  } catch (err) {
+    next(err);
+  }
+}
+
+/**
+ * GET /colonias/:id
+ * Muestra el detalle de una colonia.
+ *
+ * @param {Object} req   - req.params.id es el ID.
+ * @param {Object} res   - Se renderiza la vista detail.
+ * @param {Function} next - En caso de error.
+ * @returns {Promise&lt;void>}
+ */
+async function mostrarDetalleColonia(req, res, next) {
+  try {
+    const { id } = req.params;
+    const colonia = await recuperarPorId(id);
+    res.render('colonias/detail', {
+      title: `Colonia ${id}`,
+      colonia
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+/**
+ * GET /colonias/:id/edit
+ * Muestra el formulario de edición de una colonia.
+ *
+ * @param {Object} req   - req.params.id es el ID.
+ * @param {Object} res   - Vista edit.
+ * @param {Function} next - En caso de error.
+ * @returns {Promise&lt;void>}
+ */
+async function mostrarFormularioEditar(req, res, next) {
+  try {
+    const { id } = req.params;
+    const colonia = await recuperarPorId(id);
+    res.render('colonias/edit', {
+      title: `Editar Colonia ${id}`,
+      colonia
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+/**
+ * PUT /colonias/:id
+ * Actualiza una colonia y redirige al listado.
+ *
+ * @param {Object} req   - req.params.id y req.body.nombre.
+ * @param {Object} res   - Redirige a /colonias.
+ * @param {Function} next - En caso de error.
+ * @returns {Promise&lt;void>}
+ */
+async function actualizarColonia(req, res, next) {
+  try {
+    const { id } = req.params;
+    const datos = req.body;
+    await svcActualizarColonia({ id, nombre: datos.nombre });
+    res.redirect('/colonias');
+  } catch (err) {
+    next(err);
+  }
+}
+
+/**
+ * DELETE /colonias/:id
+ * Elimina una colonia y redirige al listado.
+ *
+ * @param {Object} req   - req.params.id es el ID.
+ * @param {Object} res   - Redirige a /colonias.
+ * @param {Function} next - En caso de error.
+ * @returns {Promise&lt;void>}
+ */
+async function eliminarColonia(req, res, next) {
+  try {
+    const { id } = req.params;
+    await svcEliminarColonia(id);
+    res.redirect('/colonias');
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = {
+  listarTodasColonias,
+  mostrarFormularioCrear,
+  crearNuevaColonia,
+  mostrarDetalleColonia,
+  mostrarFormularioEditar,
+  actualizarColonia,
+  eliminarColonia
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app.html">app</a></li><li><a href="module-controllers_coloniaController.html">controllers/coloniaController</a></li><li><a href="module-controllers_gatoController.html">controllers/gatoController</a></li><li><a href="module-controllers_indexController.html">controllers/indexController</a></li><li><a href="module-repositories_coloniaRepository.html">repositories/coloniaRepository</a></li><li><a href="module-repositories_gatoRepository.html">repositories/gatoRepository</a></li><li><a href="module-routes_coloniasRouter.html">routes/coloniasRouter</a></li><li><a href="module-routes_gatosRouter.html">routes/gatosRouter</a></li><li><a href="module-routes_indexRouter.html">routes/indexRouter</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon May 05 2025 18:45:05 GMT+0200 (hora de verano de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

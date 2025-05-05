@@ -1,0 +1,19 @@
+{
+    "tags": {
+      "allowUnknownTags": true
+    },
+    "source": {
+      "include": [
+        "app.js",
+        "controllers",
+        "repositories",
+        "routes"
+      ],
+      "includePattern": "\\.js$"
+    },
+    "opts": {
+      "destination": "./docs",
+      "recurse": true
+    }
+  }
+  
