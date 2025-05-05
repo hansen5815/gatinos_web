@@ -1,0 +1,32 @@
+{{!-- views/colonias/detail.handlebars --}}
+<h1 class="mb-4">{{title}}</h1>
+
+<div class="card mb-4 shadow-sm">
+  <div class="card-body">
+    <h5 class="card-title">{{colonia.nombre}}</h5>
+    {{#if colonia.telefono}}
+      <p class="card-text"><i class="bi bi-telephone"></i> {{colonia.telefono}}</p>
+    {{/if}}
+    {{#if colonia.descripcion}}
+      <p class="card-text">{{colonia.descripcion}}</p>
+    {{/if}}
+    {{#if colonia.latitud}}
+      <div id="mapa" class="mb-3" style="height:250px;"></div>
+      <script>
+        // Si usas Leaflet, por ejemplo:
+        const map = L.map('mapa').setView([{{colonia.latitud}}, {{colonia.longitud}}], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap'
+        }).addTo(map);
+        L.marker([{{colonia.latitud}}, {{colonia.longitud}}]).addTo(map);
+      </script>
+    {{/if}}
+  </div>
+  <div class="card-footer bg-transparent">
+    <a href="/colonias" class="btn btn-secondary">Volver al listado</a>
+    <a href="/colonias/{{colonia.id}}/edit" class="btn btn-primary ms-2">Editar</a>
+    <form action="/colonias/{{colonia.id}}?_method=DELETE" method="POST" class="d-inline">
+      <button class="btn btn-danger ms-2">Eliminar</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+{{!-- views/colonias/new.handlebars --}}
+<h1 class="mb-4">{{title}}</h1>
+
+{{!-- renderiza errores si vienen en locals.errors --}}
+{{#if errors}}
+  <div class="alert alert-danger">
+    <ul class="mb-0">
+      {{#each errors}}<li>{{this.msg}}</li>{{/each}}
+    </ul>
+  </div>
+{{/if}}
+
+<form action="/colonias" method="POST">
+  <div class="mb-3">
+    <label for="nombre" class="form-label">Nombre *</label>
+    <input
+      type="text"
+      class="form-control"
+      id="nombre"
+      name="nombre"
+      required
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="telefono" class="form-label">Teléfono</label>
+    <input
+      type="tel"
+      class="form-control"
+      id="telefono"
+      name="telefono"
+      placeholder="985 123 456"
+    />
+  </div>
+
+  <div class="mb-3">
+    <label for="descripcion" class="form-label">Descripción</label>
+    <textarea
+      class="form-control"
+      id="descripcion"
+      name="descripcion"
+      rows="3"
+    ></textarea>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="latitud" class="form-label">Latitud</label>
+      <input
+        type="number"
+        step="0.0001"
+        class="form-control"
+        id="latitud"
+        name="latitud"
+        placeholder="43.5323"
+      />
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="longitud" class="form-label">Longitud</label>
+      <input
+        type="number"
+        step="0.0001"
+        class="form-control"
+        id="longitud"
+        name="longitud"
+        placeholder="-5.6521"
+      />
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Guardar Colonia</button>
+  <a href="/colonias" class="btn btn-secondary ms-2">Cancelar</a>
+</form>

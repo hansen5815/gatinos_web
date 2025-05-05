@@ -1,0 +1,48 @@
+[
+    {
+      "id": 1,
+      "nombre": "Colonia El Sardinero",
+      "telefono": "985 123 456",
+      "descripcion": "Colonia urbana junto al parque de El Sardinero.",
+      "latitud": 43.5323,
+      "longitud": -5.6521,
+      "fechaBorrado": null
+    },
+    {
+      "id": 2,
+      "nombre": "Colonia La Arena",
+      "telefono": "985 654 321",
+      "descripcion": "Pequeña colonia en el barrio de La Arena.",
+      "latitud": 43.5402,
+      "longitud": -5.6500,
+      "fechaBorrado": null
+    },
+    {
+      "id": 3,
+      "nombre": "Colonia El Coto",
+      "telefono": "985 789 012",
+      "descripcion": "Colonia semi-rural en las afueras de Gijón.",
+      "latitud": 43.5150,
+      "longitud": -5.6000,
+      "fechaBorrado": null
+    },
+    {
+      "id": 4,
+      "nombre": "Colonia Roces",
+      "telefono": "985 210 987",
+      "descripcion": "Zona residencial con varios puntos de alimentación.",
+      "latitud": 43.5400,
+      "longitud": -5.6100,
+      "fechaBorrado": null
+    },
+    {
+      "id": 5,
+      "nombre": "Colonia Pumarín",
+      "telefono": "985 321 654",
+      "descripcion": "Colonia cercana al centro, muy transitada.",
+      "latitud": 43.5440,
+      "longitud": -5.6650,
+      "fechaBorrado": null
+    }
+  ]
+  

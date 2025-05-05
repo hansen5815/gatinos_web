@@ -52,12 +52,16 @@ function recuperarPorId(id) {
 
 /**
  * Crea una nueva colonia.
- * @param {Object} colonia - Datos de la colonia.
- * @returns {Object} La colonia creada.
- * @throws {Error} Si falta el objeto colonia.
+ * @param {Object} colonia
+ * @param {string} colonia.nombre
+ * @param {string} [colonia.telefono]
+ * @param {string} [colonia.descripcion]
+ * @param {number} [colonia.latitud]
+ * @param {number} [colonia.longitud]
+ * @returns {Object} Colonia creada
  */
 function crearColonia(colonia) {
-  if (!colonia || typeof colonia !== 'object') {
+  if (!colonia || typeof colonia.nombre !== 'string') {
     throw new Error('Colonia no proporcionada');
   }
   const colonias = readData();
@@ -65,7 +69,15 @@ function crearColonia(colonia) {
     const n = Number(c.id);
     return !isNaN(n) && n > max ? n : max;
   }, 0);
-  const nueva = { id: String(maxId + 1), ...colonia };
+  const nueva = {
+    id:        String(maxId + 1),
+    nombre:    colonia.nombre,
+    telefono:  colonia.telefono || null,
+    descripcion: colonia.descripcion || null,
+    latitud:   colonia.latitud ?? null,
+    longitud:  colonia.longitud ?? null,
+    fechaBorrado: null
+  };
   colonias.push(nueva);
   writeData(colonias);
   return nueva;

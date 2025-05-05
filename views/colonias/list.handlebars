@@ -1,0 +1,35 @@
+{{!-- views/colonias/list.handlebars --}}
+<h1 class="mb-4">{{title}}</h1>
+
+{{!-- Si no hay colonias, mensaje --}}
+{{#unless colonias.length}}
+  <div class="alert alert-info">
+    No hay colonias registradas todavía.
+  </div>
+{{/unless}}
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+  {{#each colonias}}
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{this.nombre}}</h5>
+          {{#if this.telefono}}
+            <p class="card-text">
+              <i class="bi bi-telephone"></i>
+              {{this.telefono}}
+            </p>
+          {{/if}}
+          {{#if this.descripcion}}
+            <p class="card-text">{{this.descripcion}}</p>
+          {{/if}}
+        </div>
+        <div class="card-footer bg-transparent">
+          <a href="/colonias/{{this.id}}" class="btn btn-outline-primary btn-sm">
+            Ver detalle
+          </a>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+</div>

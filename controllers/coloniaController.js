@@ -1,5 +1,8 @@
 /**
  * Controlador de colonias.
+ * Provee las acciones CRUD para el recurso "colonia",
+ * delegando la lógica de negocio al servicio correspondiente.
+ *
  * @module controllers/coloniaController
  */
 
@@ -13,11 +16,11 @@ const {
 
 /**
  * GET /colonias
- * Lista todas las colonias.
+ * Lista todas las colonias y renderiza la vista 'colonias/list'.
  *
- * @param {Object} req   - Objeto de petición de Express.
- * @param {Object} res   - Objeto de respuesta de Express.
- * @param {Function} next - Middleware next en caso de error.
+ * @param {Object}   req  - Objeto de petición de Express.
+ * @param {Object}   res  - Objeto de respuesta de Express.
+ * @param {Function} next - Función middleware para manejo de errores.
  * @returns {Promise<void>}
  */
 async function listarTodasColonias(req, res, next) {
@@ -36,8 +39,8 @@ async function listarTodasColonias(req, res, next) {
  * GET /colonias/new
  * Muestra el formulario para crear una nueva colonia.
  *
- * @param {Object} req - Objeto de petición.
- * @param {Object} res - Objeto de respuesta.
+ * @param {Object} req - Objeto de petición de Express.
+ * @param {Object} res - Objeto de respuesta de Express.
  * @returns {void}
  */
 function mostrarFormularioCrear(req, res) {
@@ -48,17 +51,25 @@ function mostrarFormularioCrear(req, res) {
 
 /**
  * POST /colonias
- * Crea una nueva colonia y redirige al listado.
+ * Crea una nueva colonia a partir de los datos del formulario
+ * y redirige al listado de colonias.
  *
- * @param {Object} req   - req.body contiene { nombre }.
- * @param {Object} res   - Se redirige a /colonias.
- * @param {Function} next - En caso de error.
+ * @param {Object}   req  - Objeto de petición, con req.body conteniendo:
+ *                          { nombre, telefono?, descripcion?, latitud?, longitud? }.
+ * @param {Object}   res  - Objeto de respuesta de Express.
+ * @param {Function} next - Función middleware para manejo de errores.
  * @returns {Promise<void>}
  */
 async function crearNuevaColonia(req, res, next) {
   try {
-    const datos = req.body;
-    await svcCrearColonia({ nombre: datos.nombre });
+    const { nombre, telefono, descripcion, latitud, longitud } = req.body;
+    await svcCrearColonia({
+      nombre,
+      telefono,
+      descripcion,
+      latitud:  latitud  ? parseFloat(latitud)  : undefined,
+      longitud: longitud ? parseFloat(longitud) : undefined
+    });
     res.redirect('/colonias');
   } catch (err) {
     next(err);
@@ -67,11 +78,11 @@ async function crearNuevaColonia(req, res, next) {
 
 /**
  * GET /colonias/:id
- * Muestra el detalle de una colonia.
+ * Recupera y muestra el detalle de una colonia específica.
  *
- * @param {Object} req   - req.params.id es el ID.
- * @param {Object} res   - Se renderiza la vista detail.
- * @param {Function} next - En caso de error.
+ * @param {Object}   req  - Objeto de petición, con req.params.id.
+ * @param {Object}   res  - Objeto de respuesta de Express.
+ * @param {Function} next - Función middleware para manejo de errores.
  * @returns {Promise<void>}
  */
 async function mostrarDetalleColonia(req, res, next) {
@@ -89,11 +100,12 @@ async function mostrarDetalleColonia(req, res, next) {
 
 /**
  * GET /colonias/:id/edit
- * Muestra el formulario de edición de una colonia.
+ * Muestra el formulario para editar una colonia existente,
+ * precargando sus datos.
  *
- * @param {Object} req   - req.params.id es el ID.
- * @param {Object} res   - Vista edit.
- * @param {Function} next - En caso de error.
+ * @param {Object}   req  - Objeto de petición, con req.params.id.
+ * @param {Object}   res  - Objeto de respuesta de Express.
+ * @param {Function} next - Función middleware para manejo de errores.
  * @returns {Promise<void>}
  */
 async function mostrarFormularioEditar(req, res, next) {
@@ -111,18 +123,27 @@ async function mostrarFormularioEditar(req, res, next) {
 
 /**
  * PUT /colonias/:id
- * Actualiza una colonia y redirige al listado.
+ * Actualiza una colonia existente con los datos del formulario
+ * y redirige al listado de colonias.
  *
- * @param {Object} req   - req.params.id y req.body.nombre.
- * @param {Object} res   - Redirige a /colonias.
- * @param {Function} next - En caso de error.
+ * @param {Object}   req  - Objeto de petición, con:
+ *                          req.params.id y req.body { nombre, telefono?, descripcion?, latitud?, longitud? }.
+ * @param {Object}   res  - Objeto de respuesta de Express.
+ * @param {Function} next - Función middleware para manejo de errores.
  * @returns {Promise<void>}
  */
 async function actualizarColonia(req, res, next) {
   try {
     const { id } = req.params;
-    const datos = req.body;
-    await svcActualizarColonia({ id, nombre: datos.nombre });
+    const { nombre, telefono, descripcion, latitud, longitud } = req.body;
+    await svcActualizarColonia({
+      id,
+      nombre,
+      telefono,
+      descripcion,
+      latitud:  latitud  ? parseFloat(latitud)  : undefined,
+      longitud: longitud ? parseFloat(longitud) : undefined
+    });
     res.redirect('/colonias');
   } catch (err) {
     next(err);
@@ -131,11 +152,11 @@ async function actualizarColonia(req, res, next) {
 
 /**
  * DELETE /colonias/:id
- * Elimina una colonia y redirige al listado.
+ * Elimina (lógicamente) una colonia y redirige al listado.
  *
- * @param {Object} req   - req.params.id es el ID.
- * @param {Object} res   - Redirige a /colonias.
- * @param {Function} next - En caso de error.
+ * @param {Object}   req  - Objeto de petición, con req.params.id.
+ * @param {Object}   res  - Objeto de respuesta de Express.
+ * @param {Function} next - Función middleware para manejo de errores.
  * @returns {Promise<void>}
  */
 async function eliminarColonia(req, res, next) {
