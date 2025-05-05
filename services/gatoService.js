@@ -38,9 +38,15 @@ const EstadoSalud = {
  * @returns {string} Uno de los valores de `EstadoSalud`.
  */
 function calcularEstadoSalud({ vacunado, cer, enfermedades }) {
-  if (!vacunado || !cer || (Array.isArray(enfermedades) && enfermedades.length > 0)) {
+  // 1) Si falta vacunación o CER → GRAVE
+  if (!vacunado || !cer) {
     return EstadoSalud.GRAVE;
   }
+  // 2) Si tiene enfermedades pero está vacunado y cer → REGULAR
+  if (Array.isArray(enfermedades) && enfermedades.length > 0) {
+    return EstadoSalud.REGULAR;
+  }
+  // 3) En caso contrario → SANO
   return EstadoSalud.SANO;
 }
 

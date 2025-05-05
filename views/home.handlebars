@@ -1,2 +1,31 @@
-<h1>{{title}}</h1>
-<p>Bienvenido a la app de gestión de Gatinos 🐱</p>
+
+<div class="container text-center py-5">
+
+  <img
+              src="/images/MiCHIS_logo.png"
+              alt="Gatinos Web"
+              width="400"
+              class="d-inline-block align-text-top"
+            />
+  <h1 class="display-4 mb-4">{{title}}</h1>
+
+  <p class="lead mb-5">
+    Bienvenido a Gatinos Web. Elige a continuación qué quieres gestionar:
+  </p>
+
+  <div class="d-grid gap-3 col-8 col-md-6 mx-auto">
+    <a href="/gatos" class="btn btn-primary btn-lg">
+      <i class="bi bi-heart-pulse me-2"></i> Gestión de Gatos
+    </a>
+    <a href="/colonias" class="btn btn-success btn-lg">
+      <i class="bi bi-geo-alt me-2"></i> Gestión de Colonias
+    </a>
+    <a href="/gatos/new" class="btn btn-warning btn-lg">
+      <i class="bi bi-plus-circle me-2"></i> Nuevo Gato
+    </a>
+    <a href="/colonias/new" class="btn btn-info btn-lg text-white">
+      <i class="bi bi-plus-circle me-2"></i> Nueva Colonia
+    </a>
+  </div>
+
+</div>

@@ -1,6 +1,7 @@
 /**
  * Controlador de gatos.
- * Provee las acciones CRUD y delega la lógica de negocio a `gatoService`.
+ * Provee las acciones CRUD para el recurso “gato”, incluyendo la asociación
+ * con colonias y el cálculo de estado de salud.
  *
  * @module controllers/gatoController
  */
@@ -16,19 +17,33 @@ const { listarColonias } = require('../services/coloniaService');
 
 /**
  * GET /gatos
- * Lista todos los gatos activos, calcula su estado de salud y renderiza la vista.
+ * Obtiene todos los gatos activos, añade el nombre de su colonia
+ * y renderiza la vista de listado.
  *
  * @param {Object}   req  - Objeto de petición de Express.
  * @param {Object}   res  - Objeto de respuesta de Express.
- * @param {Function} next - Middleware next en caso de error.
+ * @param {Function} next - Middleware para manejar errores.
  * @returns {Promise<void>}
  */
 async function listarGatos(req, res, next) {
   try {
-    const gatos = await listarGatosActivos();
+    const [gatos, colonias] = await Promise.all([
+      listarGatosActivos(),
+      listarColonias()
+    ]);
+
+    // Añadir el nombre de la colonia a cada gato
+    const gatosConColonia = gatos.map(g => {
+      const colonia = colonias.find(c => String(c.id) === String(g.coloniaId));
+      return {
+        ...g,
+        coloniaNombre: colonia ? colonia.nombre : '—'
+      };
+    });
+
     res.render('gatos/list', {
       title: 'Listado de Gatos',
-      gatos
+      gatos: gatosConColonia
     });
   } catch (err) {
     next(err);
@@ -37,11 +52,12 @@ async function listarGatos(req, res, next) {
 
 /**
  * GET /gatos/new
- * Muestra el formulario para crear un nuevo gato, incluyendo la selección de colonia.
+ * Muestra el formulario para crear un nuevo gato,
+ * incluyendo la lista de colonias disponibles.
  *
  * @param {Object}   req  - Objeto de petición de Express.
  * @param {Object}   res  - Objeto de respuesta de Express.
- * @param {Function} next - Middleware next en caso de error.
+ * @param {Function} next - Middleware para manejar errores.
  * @returns {Promise<void>}
  */
 async function mostrarFormularioCrear(req, res, next) {
@@ -58,28 +74,29 @@ async function mostrarFormularioCrear(req, res, next) {
 
 /**
  * POST /gatos
- * Crea un nuevo gato con los datos enviados en el formulario y redirige al listado.
+ * Procesa el formulario de creación, crea el gato
+ * y redirige al listado.
  *
- * @param {Object}   req  - Objeto de petición, con `req.body` conteniendo los datos del gato.
+ * @param {Object}   req  - req.body con los datos del gato.
  * @param {Object}   res  - Objeto de respuesta de Express.
- * @param {Function} next - Middleware next en caso de error.
+ * @param {Function} next - Middleware para manejar errores.
  * @returns {Promise<void>}
  */
 async function crearGato(req, res, next) {
   try {
-    const datos = req.body;
+    const d = req.body;
     await crearNuevoGato({
-      nombre:       datos.nombre,
-      edad:         Number(datos.edad),
-      peso:         Number(datos.peso),
-      vacunado:     datos.vacunado === 'on' || datos.vacunado === true,
-      cer:          datos.cer === 'on'      || datos.cer === true,
-      enfermedades: Array.isArray(datos.enfermedades)
-                       ? datos.enfermedades
-                       : datos.enfermedades
-                         ? [datos.enfermedades]
+      nombre:       d.nombre,
+      edad:         Number(d.edad),
+      peso:         Number(d.peso),
+      vacunado:     d.vacunado === 'on' || d.vacunado === true,
+      cer:          d.cer === 'on'      || d.cer === true,
+      enfermedades: Array.isArray(d.enfermedades)
+                       ? d.enfermedades
+                       : d.enfermedades
+                         ? [d.enfermedades]
                          : [],
-      coloniaId:    datos.coloniaId
+      coloniaId:    d.coloniaId
     });
     res.redirect('/gatos');
   } catch (err) {
@@ -89,11 +106,11 @@ async function crearGato(req, res, next) {
 
 /**
  * GET /gatos/:id
- * Recupera un gato por su ID y renderiza la vista detalle.
+ * Recupera un gato por ID y renderiza la vista de detalle.
  *
- * @param {Object}   req  - Objeto de petición con `req.params.id`.
+ * @param {Object}   req  - req.params.id es el identificador del gato.
  * @param {Object}   res  - Objeto de respuesta de Express.
- * @param {Function} next - Middleware next en caso de error.
+ * @param {Function} next - Middleware para manejar errores.
  * @returns {Promise<void>}
  */
 async function mostrarDetalleGato(req, res, next) {
@@ -110,11 +127,12 @@ async function mostrarDetalleGato(req, res, next) {
 
 /**
  * GET /gatos/:id/edit
- * Muestra el formulario para editar un gato, precargando sus datos y la lista de colonias.
+ * Muestra el formulario de edición para un gato existente,
+ * precargando sus datos y la lista de colonias.
  *
- * @param {Object}   req  - Objeto de petición con `req.params.id`.
+ * @param {Object}   req  - req.params.id es el identificador del gato.
  * @param {Object}   res  - Objeto de respuesta de Express.
- * @param {Function} next - Middleware next en caso de error.
+ * @param {Function} next - Middleware para manejar errores.
  * @returns {Promise<void>}
  */
 async function mostrarFormularioEditar(req, res, next) {
@@ -135,29 +153,30 @@ async function mostrarFormularioEditar(req, res, next) {
 
 /**
  * PUT /gatos/:id
- * Actualiza los datos de un gato existente y redirige al listado.
+ * Procesa el formulario de edición, actualiza el gato
+ * y redirige al listado.
  *
- * @param {Object}   req  - Objeto de petición con `req.params.id` y `req.body`.
+ * @param {Object}   req  - req.params.id e req.body con los datos actualizados.
  * @param {Object}   res  - Objeto de respuesta de Express.
- * @param {Function} next - Middleware next en caso de error.
+ * @param {Function} next - Middleware para manejar errores.
  * @returns {Promise<void>}
  */
 async function actualizarGato(req, res, next) {
   try {
-    const datos = req.body;
+    const d = req.body;
     await actualizarDatosGato({
       id:            req.params.id,
-      nombre:        datos.nombre,
-      edad:          Number(datos.edad),
-      peso:          Number(datos.peso),
-      vacunado:      datos.vacunado === 'on' || datos.vacunado === true,
-      cer:           datos.cer === 'on'      || datos.cer === true,
-      enfermedades:  Array.isArray(datos.enfermedades)
-                         ? datos.enfermedades
-                         : datos.enfermedades
-                           ? [datos.enfermedades]
+      nombre:        d.nombre,
+      edad:          Number(d.edad),
+      peso:          Number(d.peso),
+      vacunado:      d.vacunado === 'on' || d.vacunado === true,
+      cer:           d.cer === 'on'      || d.cer === true,
+      enfermedades:  Array.isArray(d.enfermedades)
+                         ? d.enfermedades
+                         : d.enfermedades
+                           ? [d.enfermedades]
                            : [],
-      coloniaId:     datos.coloniaId
+      coloniaId:     d.coloniaId
     });
     res.redirect('/gatos');
   } catch (err) {
@@ -169,9 +188,9 @@ async function actualizarGato(req, res, next) {
  * DELETE /gatos/:id
  * Marca un gato como borrado y redirige al listado.
  *
- * @param {Object}   req  - Objeto de petición con `req.params.id`.
+ * @param {Object}   req  - req.params.id es el identificador del gato.
  * @param {Object}   res  - Objeto de respuesta de Express.
- * @param {Function} next - Middleware next en caso de error.
+ * @param {Function} next - Middleware para manejar errores.
  * @returns {Promise<void>}
  */
 async function eliminarGato(req, res, next) {
