@@ -39,7 +39,8 @@
     
         
             <div class="description">Repositorio para gestión de datos de gatos.
-Opera sobre `data/gatos.json`.</div>
+Opera sobre `data/gatos.json` y provee las operaciones CRUD,
+incluyendo la asociación de cada gato con una colonia.</div>
         
 
         
@@ -145,7 +146,7 @@ Opera sobre `data/gatos.json`.</div>
     
 
     
-    <h4 class="name" id="~createGato"><span class="type-signature">(inner) </span>createGato<span class="signature">(gato)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="~createGato"><span class="type-signature">(inner) </span>createGato<span class="signature">(gato)</span><span class="type-signature"> &rarr; {Gato}</span></h4>
     
 
     
@@ -153,7 +154,7 @@ Opera sobre `data/gatos.json`.</div>
 
 
 <div class="description">
-    Crea un nuevo gato.
+    Crea un nuevo gato con ID correlativo.
 </div>
 
 
@@ -205,7 +206,197 @@ Opera sobre `data/gatos.json`.</div>
 
             
 
-            <td class="description last">{ nombre, edad, peso }.</td>
+            <td class="description last">Datos del nuevo gato.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>nombre</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Nombre del gato.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>edad</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Edad en años.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>peso</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Peso en kg.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>vacunado</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Indicador de vacunación.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Indicador de protocolo CER.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>enfermedades</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Lista de enfermedades.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>coloniaId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID de la colonia asociada.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -246,7 +437,7 @@ Opera sobre `data/gatos.json`.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="repositories_gatoRepository.js.html">repositories/gatoRepository.js</a>, <a href="repositories_gatoRepository.js.html#line57">line 57</a>
+        <a href="repositories_gatoRepository.js.html">repositories/gatoRepository.js</a>, <a href="repositories_gatoRepository.js.html#line88">line 88</a>
     </li></ul></dd>
     
 
@@ -276,7 +467,7 @@ Opera sobre `data/gatos.json`.</div>
 <dl>
     <dt>
         <div class="param-desc">
-        Si faltan datos o son de tipo incorrecto.
+        Si faltan datos obligatorios o son de tipo incorrecto.
         </div>
     </dt>
     <dd></dd>
@@ -304,7 +495,7 @@ Opera sobre `data/gatos.json`.</div>
 
         
 <div class="param-desc">
-    Gato creado.
+    El objeto Gato creado.
 </div>
 
 
@@ -315,7 +506,7 @@ Opera sobre `data/gatos.json`.</div>
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type">Gato</span>
 
 
     </dd>
@@ -333,7 +524,7 @@ Opera sobre `data/gatos.json`.</div>
     
 
     
-    <h4 class="name" id="~deleteGato"><span class="type-signature">(inner) </span>deleteGato<span class="signature">(id)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="~deleteGato"><span class="type-signature">(inner) </span>deleteGato<span class="signature">(id)</span><span class="type-signature"> &rarr; {Gato}</span></h4>
     
 
     
@@ -341,7 +532,7 @@ Opera sobre `data/gatos.json`.</div>
 
 
 <div class="description">
-    Marca un gato como borrado.
+    Marca un gato como borrado (fechaBorrado = ahora).
 </div>
 
 
@@ -396,7 +587,7 @@ Opera sobre `data/gatos.json`.</div>
 
             
 
-            <td class="description last">ID del gato.</td>
+            <td class="description last">Identificador del gato a eliminar.</td>
         </tr>
 
     
@@ -437,7 +628,7 @@ Opera sobre `data/gatos.json`.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="repositories_gatoRepository.js.html">repositories/gatoRepository.js</a>, <a href="repositories_gatoRepository.js.html#line95">line 95</a>
+        <a href="repositories_gatoRepository.js.html">repositories/gatoRepository.js</a>, <a href="repositories_gatoRepository.js.html#line159">line 159</a>
     </li></ul></dd>
     
 
@@ -467,7 +658,7 @@ Opera sobre `data/gatos.json`.</div>
 <dl>
     <dt>
         <div class="param-desc">
-        Si no existe o falta id.
+        Si no se proporciona id o no existe el gato.
         </div>
     </dt>
     <dd></dd>
@@ -495,7 +686,7 @@ Opera sobre `data/gatos.json`.</div>
 
         
 <div class="param-desc">
-    Gato con fechaBorrado.
+    El objeto Gato con fechaBorrado asignada.
 </div>
 
 
@@ -506,7 +697,7 @@ Opera sobre `data/gatos.json`.</div>
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type">Gato</span>
 
 
     </dd>
@@ -524,7 +715,7 @@ Opera sobre `data/gatos.json`.</div>
     
 
     
-    <h4 class="name" id="~getAllGatos"><span class="type-signature">(inner) </span>getAllGatos<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Object>}</span></h4>
+    <h4 class="name" id="~getAllGatos"><span class="type-signature">(inner) </span>getAllGatos<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;Gato>}</span></h4>
     
 
     
@@ -532,7 +723,7 @@ Opera sobre `data/gatos.json`.</div>
 
 
 <div class="description">
-    Devuelve todos los gatos.
+    Devuelve todos los gatos (incluidos los marcados como borrados).
 </div>
 
 
@@ -576,7 +767,7 @@ Opera sobre `data/gatos.json`.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="repositories_gatoRepository.js.html">repositories/gatoRepository.js</a>, <a href="repositories_gatoRepository.js.html#line35">line 35</a>
+        <a href="repositories_gatoRepository.js.html">repositories/gatoRepository.js</a>, <a href="repositories_gatoRepository.js.html#line55">line 55</a>
     </li></ul></dd>
     
 
@@ -605,7 +796,7 @@ Opera sobre `data/gatos.json`.</div>
 
         
 <div class="param-desc">
-    Array de gatos.
+    Array con todos los gatos.
 </div>
 
 
@@ -616,7 +807,7 @@ Opera sobre `data/gatos.json`.</div>
     </dt>
     <dd>
         
-<span class="param-type">Array.&lt;Object></span>
+<span class="param-type">Array.&lt;Gato></span>
 
 
     </dd>
@@ -634,7 +825,7 @@ Opera sobre `data/gatos.json`.</div>
     
 
     
-    <h4 class="name" id="~getGatoById"><span class="type-signature">(inner) </span>getGatoById<span class="signature">(id)</span><span class="type-signature"> &rarr; {Object|undefined}</span></h4>
+    <h4 class="name" id="~getGatoById"><span class="type-signature">(inner) </span>getGatoById<span class="signature">(id)</span><span class="type-signature"> &rarr; {Gato|undefined}</span></h4>
     
 
     
@@ -642,7 +833,7 @@ Opera sobre `data/gatos.json`.</div>
 
 
 <div class="description">
-    Recupera un gato por ID.
+    Recupera un gato por su ID.
 </div>
 
 
@@ -697,7 +888,7 @@ Opera sobre `data/gatos.json`.</div>
 
             
 
-            <td class="description last">ID del gato.</td>
+            <td class="description last">Identificador del gato.</td>
         </tr>
 
     
@@ -738,7 +929,7 @@ Opera sobre `data/gatos.json`.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="repositories_gatoRepository.js.html">repositories/gatoRepository.js</a>, <a href="repositories_gatoRepository.js.html#line45">line 45</a>
+        <a href="repositories_gatoRepository.js.html">repositories/gatoRepository.js</a>, <a href="repositories_gatoRepository.js.html#line66">line 66</a>
     </li></ul></dd>
     
 
@@ -768,7 +959,7 @@ Opera sobre `data/gatos.json`.</div>
 <dl>
     <dt>
         <div class="param-desc">
-        Si no se proporciona id.
+        Si no se proporciona un id.
         </div>
     </dt>
     <dd></dd>
@@ -796,7 +987,7 @@ Opera sobre `data/gatos.json`.</div>
 
         
 <div class="param-desc">
-    Gato o undefined.
+    El Gato encontrado, o undefined si no existe.
 </div>
 
 
@@ -807,7 +998,7 @@ Opera sobre `data/gatos.json`.</div>
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type">Gato</span>
 |
 
 <span class="param-type">undefined</span>
@@ -828,7 +1019,7 @@ Opera sobre `data/gatos.json`.</div>
     
 
     
-    <h4 class="name" id="~updateGato"><span class="type-signature">(inner) </span>updateGato<span class="signature">(gatoActualizado)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="~updateGato"><span class="type-signature">(inner) </span>updateGato<span class="signature">(gatoActualizado)</span><span class="type-signature"> &rarr; {Gato}</span></h4>
     
 
     
@@ -836,7 +1027,7 @@ Opera sobre `data/gatos.json`.</div>
 
 
 <div class="description">
-    Actualiza un gato existente.
+    Actualiza un gato existente (incluyendo su coloniaId).
 </div>
 
 
@@ -888,7 +1079,303 @@ Opera sobre `data/gatos.json`.</div>
 
             
 
-            <td class="description last">Debe incluir id.</td>
+            <td class="description last">Datos del gato a actualizar.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Identificador del gato.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>nombre</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Nuevo nombre.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>edad</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Nueva edad.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>peso</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Nuevo peso.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>vacunado</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Indicador de vacunación.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Indicador de protocolo CER.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>enfermedades</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Lista de enfermedades.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>coloniaId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">ID de colonia.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -929,7 +1416,7 @@ Opera sobre `data/gatos.json`.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="repositories_gatoRepository.js.html">repositories/gatoRepository.js</a>, <a href="repositories_gatoRepository.js.html#line80">line 80</a>
+        <a href="repositories_gatoRepository.js.html">repositories/gatoRepository.js</a>, <a href="repositories_gatoRepository.js.html#line141">line 141</a>
     </li></ul></dd>
     
 
@@ -959,7 +1446,7 @@ Opera sobre `data/gatos.json`.</div>
 <dl>
     <dt>
         <div class="param-desc">
-        Si no existe.
+        Si no se encuentra el gato.
         </div>
     </dt>
     <dd></dd>
@@ -987,7 +1474,7 @@ Opera sobre `data/gatos.json`.</div>
 
         
 <div class="param-desc">
-    Gato actualizado.
+    El objeto Gato actualizado.
 </div>
 
 
@@ -998,7 +1485,7 @@ Opera sobre `data/gatos.json`.</div>
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type">Gato</span>
 
 
     </dd>
@@ -1013,6 +1500,324 @@ Opera sobre `data/gatos.json`.</div>
         
     
 
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="~Gato">Gato</h4>
+
+
+
+
+<div class="description">
+    Objeto Gato.
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Identificador único.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>nombre</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Nombre del gato.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>edad</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Edad en años.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>peso</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Peso en kilogramos.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>vacunado</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Indica si está vacunado.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Indica si pasó por CER.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>enfermedades</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Lista de enfermedades.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>coloniaId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">ID de la colonia asociada.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fechaBorrado</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">null</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Fecha ISO de borrado lógico, o null.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="repositories_gatoRepository.js.html">repositories/gatoRepository.js</a>, <a href="repositories_gatoRepository.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
     
 
     
@@ -1032,7 +1837,7 @@ Opera sobre `data/gatos.json`.</div>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon May 05 2025 18:45:05 GMT+0200 (hora de verano de Europa central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon May 05 2025 19:56:39 GMT+0200 (hora de verano de Europa central)
 </footer>
 
 <script> prettyPrint(); </script>

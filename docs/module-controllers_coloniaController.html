@@ -38,7 +38,9 @@
     <div class="container-overview">
     
         
-            <div class="description">Controlador de colonias.</div>
+            <div class="description">Controlador de colonias.
+Provee las acciones CRUD para el recurso "colonia",
+delegando la lógica de negocio al servicio correspondiente.</div>
         
 
         
@@ -153,7 +155,8 @@
 
 <div class="description">
     PUT /colonias/:id
-Actualiza una colonia y redirige al listado.
+Actualiza una colonia existente con los datos del formulario
+y redirige al listado de colonias.
 </div>
 
 
@@ -205,7 +208,8 @@ Actualiza una colonia y redirige al listado.
 
             
 
-            <td class="description last">req.params.id y req.body.nombre.</td>
+            <td class="description last">Objeto de petición, con:
+                         req.params.id y req.body { nombre, telefono?, descripcion?, latitud?, longitud? }.</td>
         </tr>
 
     
@@ -228,7 +232,7 @@ Actualiza una colonia y redirige al listado.
 
             
 
-            <td class="description last">Redirige a /colonias.</td>
+            <td class="description last">Objeto de respuesta de Express.</td>
         </tr>
 
     
@@ -251,7 +255,7 @@ Actualiza una colonia y redirige al listado.
 
             
 
-            <td class="description last">En caso de error.</td>
+            <td class="description last">Función middleware para manejo de errores.</td>
         </tr>
 
     
@@ -292,7 +296,7 @@ Actualiza una colonia y redirige al listado.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_coloniaController.js.html">controllers/coloniaController.js</a>, <a href="controllers_coloniaController.js.html#line121">line 121</a>
+        <a href="controllers_coloniaController.js.html">controllers/coloniaController.js</a>, <a href="controllers_coloniaController.js.html#line135">line 135</a>
     </li></ul></dd>
     
 
@@ -355,7 +359,8 @@ Actualiza una colonia y redirige al listado.
 
 <div class="description">
     POST /colonias
-Crea una nueva colonia y redirige al listado.
+Crea una nueva colonia a partir de los datos del formulario
+y redirige al listado de colonias.
 </div>
 
 
@@ -407,7 +412,8 @@ Crea una nueva colonia y redirige al listado.
 
             
 
-            <td class="description last">req.body contiene { nombre }.</td>
+            <td class="description last">Objeto de petición, con req.body conteniendo:
+                         { nombre, telefono?, descripcion?, latitud?, longitud? }.</td>
         </tr>
 
     
@@ -430,7 +436,7 @@ Crea una nueva colonia y redirige al listado.
 
             
 
-            <td class="description last">Se redirige a /colonias.</td>
+            <td class="description last">Objeto de respuesta de Express.</td>
         </tr>
 
     
@@ -453,7 +459,7 @@ Crea una nueva colonia y redirige al listado.
 
             
 
-            <td class="description last">En caso de error.</td>
+            <td class="description last">Función middleware para manejo de errores.</td>
         </tr>
 
     
@@ -494,7 +500,7 @@ Crea una nueva colonia y redirige al listado.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_coloniaController.js.html">controllers/coloniaController.js</a>, <a href="controllers_coloniaController.js.html#line58">line 58</a>
+        <a href="controllers_coloniaController.js.html">controllers/coloniaController.js</a>, <a href="controllers_coloniaController.js.html#line63">line 63</a>
     </li></ul></dd>
     
 
@@ -557,7 +563,7 @@ Crea una nueva colonia y redirige al listado.
 
 <div class="description">
     DELETE /colonias/:id
-Elimina una colonia y redirige al listado.
+Elimina (lógicamente) una colonia y redirige al listado.
 </div>
 
 
@@ -609,7 +615,7 @@ Elimina una colonia y redirige al listado.
 
             
 
-            <td class="description last">req.params.id es el ID.</td>
+            <td class="description last">Objeto de petición, con req.params.id.</td>
         </tr>
 
     
@@ -632,7 +638,7 @@ Elimina una colonia y redirige al listado.
 
             
 
-            <td class="description last">Redirige a /colonias.</td>
+            <td class="description last">Objeto de respuesta de Express.</td>
         </tr>
 
     
@@ -655,7 +661,7 @@ Elimina una colonia y redirige al listado.
 
             
 
-            <td class="description last">En caso de error.</td>
+            <td class="description last">Función middleware para manejo de errores.</td>
         </tr>
 
     
@@ -696,7 +702,7 @@ Elimina una colonia y redirige al listado.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_coloniaController.js.html">controllers/coloniaController.js</a>, <a href="controllers_coloniaController.js.html#line141">line 141</a>
+        <a href="controllers_coloniaController.js.html">controllers/coloniaController.js</a>, <a href="controllers_coloniaController.js.html#line162">line 162</a>
     </li></ul></dd>
     
 
@@ -759,7 +765,7 @@ Elimina una colonia y redirige al listado.
 
 <div class="description">
     GET /colonias
-Lista todas las colonias.
+Lista todas las colonias y renderiza la vista 'colonias/list'.
 </div>
 
 
@@ -857,7 +863,7 @@ Lista todas las colonias.
 
             
 
-            <td class="description last">Middleware next en caso de error.</td>
+            <td class="description last">Función middleware para manejo de errores.</td>
         </tr>
 
     
@@ -898,7 +904,7 @@ Lista todas las colonias.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_coloniaController.js.html">controllers/coloniaController.js</a>, <a href="controllers_coloniaController.js.html#line23">line 23</a>
+        <a href="controllers_coloniaController.js.html">controllers/coloniaController.js</a>, <a href="controllers_coloniaController.js.html#line26">line 26</a>
     </li></ul></dd>
     
 
@@ -961,7 +967,7 @@ Lista todas las colonias.
 
 <div class="description">
     GET /colonias/:id
-Muestra el detalle de una colonia.
+Recupera y muestra el detalle de una colonia específica.
 </div>
 
 
@@ -1013,7 +1019,7 @@ Muestra el detalle de una colonia.
 
             
 
-            <td class="description last">req.params.id es el ID.</td>
+            <td class="description last">Objeto de petición, con req.params.id.</td>
         </tr>
 
     
@@ -1036,7 +1042,7 @@ Muestra el detalle de una colonia.
 
             
 
-            <td class="description last">Se renderiza la vista detail.</td>
+            <td class="description last">Objeto de respuesta de Express.</td>
         </tr>
 
     
@@ -1059,7 +1065,7 @@ Muestra el detalle de una colonia.
 
             
 
-            <td class="description last">En caso de error.</td>
+            <td class="description last">Función middleware para manejo de errores.</td>
         </tr>
 
     
@@ -1100,7 +1106,7 @@ Muestra el detalle de una colonia.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_coloniaController.js.html">controllers/coloniaController.js</a>, <a href="controllers_coloniaController.js.html#line77">line 77</a>
+        <a href="controllers_coloniaController.js.html">controllers/coloniaController.js</a>, <a href="controllers_coloniaController.js.html#line88">line 88</a>
     </li></ul></dd>
     
 
@@ -1215,7 +1221,7 @@ Muestra el formulario para crear una nueva colonia.
 
             
 
-            <td class="description last">Objeto de petición.</td>
+            <td class="description last">Objeto de petición de Express.</td>
         </tr>
 
     
@@ -1238,7 +1244,7 @@ Muestra el formulario para crear una nueva colonia.
 
             
 
-            <td class="description last">Objeto de respuesta.</td>
+            <td class="description last">Objeto de respuesta de Express.</td>
         </tr>
 
     
@@ -1279,7 +1285,7 @@ Muestra el formulario para crear una nueva colonia.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_coloniaController.js.html">controllers/coloniaController.js</a>, <a href="controllers_coloniaController.js.html#line43">line 43</a>
+        <a href="controllers_coloniaController.js.html">controllers/coloniaController.js</a>, <a href="controllers_coloniaController.js.html#line46">line 46</a>
     </li></ul></dd>
     
 
@@ -1342,7 +1348,8 @@ Muestra el formulario para crear una nueva colonia.
 
 <div class="description">
     GET /colonias/:id/edit
-Muestra el formulario de edición de una colonia.
+Muestra el formulario para editar una colonia existente,
+precargando sus datos.
 </div>
 
 
@@ -1394,7 +1401,7 @@ Muestra el formulario de edición de una colonia.
 
             
 
-            <td class="description last">req.params.id es el ID.</td>
+            <td class="description last">Objeto de petición, con req.params.id.</td>
         </tr>
 
     
@@ -1417,7 +1424,7 @@ Muestra el formulario de edición de una colonia.
 
             
 
-            <td class="description last">Vista edit.</td>
+            <td class="description last">Objeto de respuesta de Express.</td>
         </tr>
 
     
@@ -1440,7 +1447,7 @@ Muestra el formulario de edición de una colonia.
 
             
 
-            <td class="description last">En caso de error.</td>
+            <td class="description last">Función middleware para manejo de errores.</td>
         </tr>
 
     
@@ -1481,7 +1488,7 @@ Muestra el formulario de edición de una colonia.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_coloniaController.js.html">controllers/coloniaController.js</a>, <a href="controllers_coloniaController.js.html#line99">line 99</a>
+        <a href="controllers_coloniaController.js.html">controllers/coloniaController.js</a>, <a href="controllers_coloniaController.js.html#line111">line 111</a>
     </li></ul></dd>
     
 
@@ -1551,7 +1558,7 @@ Muestra el formulario de edición de una colonia.
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon May 05 2025 18:45:05 GMT+0200 (hora de verano de Europa central)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon May 05 2025 19:56:39 GMT+0200 (hora de verano de Europa central)
 </footer>
 
 <script> prettyPrint(); </script>
